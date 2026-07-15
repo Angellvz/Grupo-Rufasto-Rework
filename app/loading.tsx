@@ -1,0 +1,7 @@
+export default function Loading() {
+  return (
+    <div className="flex min-h-[60vh] items-center justify-center bg-background pt-[72px]">
+      <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+    </div>
+  );
+}
