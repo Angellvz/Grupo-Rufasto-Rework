@@ -1,37 +1,33 @@
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { LinkButton } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
 import { whatsappLink } from "@/lib/data";
 
 export function Cta() {
   return (
-    <section className="relative overflow-hidden bg-primary-900 py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(139,197,63,0.18),transparent_50%)]" />
-      <Container className="relative z-10 flex flex-col items-center gap-8 text-center">
-        <Reveal>
-          <h2 className="max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            ¿Listo para un espacio más limpio y seguro?
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="max-w-lg text-white/60">
-            Escríbenos y un especialista te contactará para diseñar el plan de
-            sanidad ambiental que tu empresa necesita.
-          </p>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <LinkButton
-            href={whatsappLink("Hola Grupo Rufasto, quisiera información sobre Rufasto Servicios")}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="accent"
-            size="lg"
-          >
-            <MessageCircle className="h-4 w-4" />
-            Escríbenos por WhatsApp
-          </LinkButton>
-        </Reveal>
+    <section className="bg-primary-900 py-16 sm:py-20">
+      <Container>
+        <a
+          href={whatsappLink("Hola, quisiera información sobre Rufasto Servicios")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mx-auto block max-w-5xl overflow-hidden rounded-3xl bg-white shadow-2xl"
+        >
+          <div className="relative aspect-[16/7] min-h-52">
+            <Image
+              src="/images/Rufasto servicios.png"
+              alt="Rufasto Servicios"
+              fill
+              className="object-cover transition duration-500 group-hover:scale-[1.02]"
+              sizes="(min-width: 1024px) 960px, 100vw"
+            />
+            <div className="absolute inset-0 bg-primary-900/20" />
+            <span className="absolute bottom-5 right-5 inline-flex items-center gap-2 rounded-full bg-accent-500 px-5 py-3 text-sm font-semibold text-primary-900 shadow-lg">
+              <MessageCircle className="h-4 w-4" />
+              Contáctanos por WhatsApp
+            </span>
+          </div>
+        </a>
       </Container>
     </section>
   );

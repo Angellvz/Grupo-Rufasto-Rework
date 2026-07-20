@@ -16,7 +16,7 @@ export function Logo({
       className={cn("relative flex h-10 w-[150px] shrink-0 sm:h-11 sm:w-[170px]", className)}
     >
       <Image
-        src="/logo.png"
+        src="/images/LogoRufasto.png"
         alt="Grupo Rufasto"
         fill
         priority
