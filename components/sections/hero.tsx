@@ -32,11 +32,11 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-[clamp(350px,55svh,500px)] sm:min-h-[min(720px,100svh)] overflow-hidden bg-primary-900 pt-[72px]"
+      className="relative w-full sm:min-h-[min(720px,100svh)] overflow-hidden bg-primary-900 pt-[72px]"
       aria-roledescription="carrusel"
       aria-label="Presentación de Grupo Rufasto"
     >
-      <div className="relative mx-auto min-h-[calc(clamp(350px,55svh,500px)-72px)] sm:min-h-[calc(min(720px,100svh)-72px)] max-w-[1600px]">
+      <div className="relative mx-auto w-full aspect-[5/2] sm:aspect-auto sm:min-h-[calc(min(720px,100svh)-72px)] max-w-[1600px]">
         {slides.map((slide, index) => {
           const isLideres = slide.image === "/images/LideresSanidad.svg";
           const imageContent = (
@@ -78,7 +78,7 @@ export function Hero() {
           );
         })}
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primary-900/35 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 sm:h-32 bg-gradient-to-t from-primary-900/10 sm:from-primary-900/35 to-transparent" />
 
         <button
           type="button"
