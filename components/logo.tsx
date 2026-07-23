@@ -13,7 +13,7 @@ export function Logo({
     <Link
       href="/"
       aria-label="Grupo Rufasto - Ir al inicio"
-      className={cn("relative flex h-10 w-[150px] shrink-0 sm:h-11 sm:w-[170px]", className)}
+      className={cn("relative flex h-14 w-[210px] shrink-0 sm:h-16 sm:w-[240px]", className)}
     >
       <Image
         src="/images/LogoRufasto.png"
@@ -21,7 +21,7 @@ export function Logo({
         fill
         priority
         className={cn("object-contain object-left", light && "brightness-0 invert")}
-        sizes="170px"
+        sizes="240px"
       />
     </Link>
   );

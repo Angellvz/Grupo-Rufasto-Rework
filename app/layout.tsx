@@ -28,18 +28,22 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Grupo Rufasto - Sanidad Ambiental y Limpieza Industrial",
+    default: "Grupo Rufasto - Fumigación y Sanidad Ambiental",
     template: "%s | Grupo Rufasto",
   },
-  description: siteConfig.description,
+  description: "Expertos en fumigación, sanidad ambiental, limpieza industrial y control de plagas. Servicios eco-amigables en Arequipa, Puno, Cusco, Moquegua y Tacna.",
   keywords: [
+    "fumigación en Arequipa",
+    "fumigación en Puno",
+    "fumigación en Cusco",
+    "fumigación en Tacna",
+    "empresa de fumigación",
     "sanidad ambiental",
     "limpieza industrial",
     "control de plagas",
     "desinfección",
     "desratización",
     "Grupo Rufasto",
-    "Arequipa",
   ],
   authors: [{ name: "Grupo Rufasto" }],
   alternates: { canonical: "/" },
@@ -48,18 +52,15 @@ export const metadata: Metadata = {
     locale: "es_PE",
     url: siteConfig.url,
     siteName: "Grupo Rufasto",
-    title: "Grupo Rufasto - Sanidad Ambiental y Limpieza Industrial",
-    description: siteConfig.description,
+    title: "Grupo Rufasto - Fumigación y Sanidad Ambiental",
+    description: "Expertos en fumigación, sanidad ambiental, limpieza industrial y control de plagas en Arequipa y el sur del Perú.",
     images: [{ url: "/images/og-cover.jpg", width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Grupo Rufasto - Sanidad Ambiental y Limpieza Industrial",
-    description: siteConfig.description,
+    title: "Grupo Rufasto - Fumigación y Sanidad Ambiental",
+    description: "Expertos en fumigación, sanidad ambiental y limpieza industrial.",
     images: ["/images/og-cover.jpg"],
-  },
-  icons: {
-    icon: "/favicon.ico",
   },
   robots: {
     index: true,
@@ -67,11 +68,45 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": siteConfig.name,
+  "image": `${siteConfig.url}/images/og-cover.jpg`,
+  "@id": siteConfig.url,
+  "url": siteConfig.url,
+  "telephone": `+51${siteConfig.phoneWhatsapp}`,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Urb. Lara C19 Socabaya",
+    "addressLocality": "Arequipa",
+    "addressRegion": "Arequipa",
+    "postalCode": "04001",
+    "addressCountry": "PE"
+  },
+  "areaServed": siteConfig.locations.map(loc => ({
+    "@type": "City",
+    "name": loc
+  })),
+  "description": "Expertos en sanidad ambiental, fumigación, limpieza industrial y control de plagas en el sur del Perú.",
+  "sameAs": [
+    siteConfig.social.facebook,
+    siteConfig.social.instagram,
+    siteConfig.social.linkedin
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <Navbar />
         <main>{children}</main>

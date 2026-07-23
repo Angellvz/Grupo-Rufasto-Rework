@@ -11,13 +11,15 @@ export const buttonVariants = cva(
         primary:
           "bg-primary text-white hover:bg-primary-600 shadow-sm hover:shadow-md active:scale-[0.98]",
         accent:
-          "bg-accent-500 text-primary-900 hover:bg-accent-400 shadow-sm hover:shadow-md active:scale-[0.98]",
+          "bg-accent-500 text-white hover:bg-accent-400 shadow-sm hover:shadow-md active:scale-[0.98]",
         outline:
           "border border-white/30 text-white hover:bg-white/10 active:scale-[0.98]",
         ghost:
           "text-primary hover:bg-primary-50 active:scale-[0.98]",
         dark:
           "bg-ink text-white hover:bg-secondary-800 shadow-sm hover:shadow-md active:scale-[0.98]",
+        inverse:
+          "bg-white text-primary-700 shadow-md shadow-black/10 ring-1 ring-black/5 hover:bg-primary-50 hover:text-primary-800 active:scale-[0.98]",
       },
       size: {
         sm: "h-9 px-4 text-xs",

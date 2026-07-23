@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Mail, Phone, MapPin, CheckCircle2, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, CheckCircle2, Loader2, Globe } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
 import { Reveal } from "@/components/ui/reveal";
@@ -40,12 +40,32 @@ export function ContactForm() {
     setErrors(validation);
     if (Object.keys(validation).length > 0) return;
 
-    // NOTE: Cliente-only. Aquí se conectará el endpoint / servicio de envío
-    // (por ejemplo una API route en app/api/contact/route.ts o un proveedor externo)
     setState("submitting");
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    setState("success");
-    setValues(initialValues);
+    
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/luisangxd123@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          Nombre: values.name,
+          Email: values.email,
+          Teléfono: values.phone,
+          Mensaje: values.message
+        })
+      });
+
+      if (res.ok) {
+        setState("success");
+        setValues(initialValues);
+      } else {
+        setState("error");
+      }
+    } catch (error) {
+      setState("error");
+    }
   }
 
   return (
@@ -55,7 +75,9 @@ export function ContactForm() {
           <SectionTitle
             eyebrow="Contacto"
             title="Estamos aquí para ayudarte"
+            titleAccentWords={2}
             description="Escríbenos y un especialista se pondrá en contacto contigo a la brevedad."
+            descriptionAccentWords={3}
           />
 
           <ul className="mt-10 space-y-5">
@@ -74,7 +96,14 @@ export function ContactForm() {
               </div>
             </li>
             <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 text-accent-600" />
+              <MapPin className="mt-0.5 h-5 w-5 text-accent-600 shrink-0" />
+              <div>
+                <p className="text-sm font-semibold text-ink">Dirección</p>
+                <p className="text-sm text-ink/60">{siteConfig.address}</p>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <Globe className="mt-0.5 h-5 w-5 text-accent-600 shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-ink">Cobertura</p>
                 <p className="text-sm text-ink/60">{siteConfig.locations.join(" · ")}</p>
@@ -85,6 +114,8 @@ export function ContactForm() {
 
         <Reveal delay={0.1}>
           <form
+            action="https://formsubmit.co/luisangxd123@gmail.com"
+            method="POST"
             onSubmit={handleSubmit}
             noValidate
             className="rounded-2xl border border-border bg-background p-6 sm:p-8"

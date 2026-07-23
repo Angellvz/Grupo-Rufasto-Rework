@@ -19,6 +19,7 @@ export function Certifications() {
           eyebrow="Nuestro respaldo"
           title="Certificaciones"
           description="Estándares que respaldan nuestro compromiso con la calidad, la seguridad y el cuidado ambiental."
+          descriptionAccentWords={3}
         />
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-3">

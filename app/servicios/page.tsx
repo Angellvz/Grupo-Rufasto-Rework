@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/page-header";
-import { ServicesGrid } from "@/components/sections/services-grid";
-import { Certifications } from "@/components/sections/certifications";
-import { Cta } from "@/components/sections/cta";
+import { ServicesList } from "@/components/sections/services-list";
 
 export const metadata: Metadata = {
-  title: "Servicios",
+  title: "Servicios de Fumigación y Sanidad Ambiental",
   description:
-    "Desinfección, desinsectación, desratización, control aviar, limpieza de tanques, limpieza industrial, áreas verdes y alquiler de elevadores.",
+    "Expertos en fumigación, desinfección, control de plagas y limpieza industrial en Arequipa, Cusco, Puno, Moquegua y Tacna.",
   alternates: { canonical: "/servicios" },
 };
 
@@ -17,11 +15,12 @@ export default function ServiciosPage() {
       <PageHeader
         eyebrow="Servicios"
         title="Un servicio para cada necesidad de sanidad ambiental"
+        titleAccentWords={2}
         description="Ocho líneas de servicio especializadas, con protocolos certificados y productos eco-amigables."
+        descriptionAccentWords={2}
+        backgroundImage="/images/ServiciosPortada.png"
       />
-      <ServicesGrid />
-      <Certifications />
-      <Cta />
+      <ServicesList />
     </>
   );
 }

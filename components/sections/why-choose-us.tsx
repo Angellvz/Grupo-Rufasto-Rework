@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
+import { Reveal } from "@/components/ui/reveal";
 import { whyChooseUs } from "@/lib/data";
 
 const slides = [
-  { image: "/images/noscuidamos.svg", alt: "En Grupo Rufasto nos cuidamos" },
-  { image: "/images/trabajarnosotros.svg", alt: "Trabaja con Grupo Rufasto" },
+  { image: "/images/noscuidamos.png", alt: "En Grupo Rufasto nos cuidamos" },
+  { image: "/images/trabajarnosotros.png", alt: "Trabaja con Grupo Rufasto" },
 ];
 
 export function WhyChooseUs() {
@@ -29,7 +30,9 @@ export function WhyChooseUs() {
           align="center"
           eyebrow="Nuestro compromiso"
           title="¿Por qué elegir a Grupo Rufasto?"
+          titleAccentWords={2}
           description="Experiencia, cercanía y procesos responsables para cuidar cada espacio."
+          descriptionAccentWords={3}
         />
 
         <div className="mx-auto mt-12 max-w-5xl">
@@ -58,12 +61,14 @@ export function WhyChooseUs() {
           </div>
 
           <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyChooseUs.map((item) => (
-              <li key={item.title} className="rounded-2xl bg-primary-50 p-5">
-                <CheckCircle2 className="h-5 w-5 text-accent-600" />
-                <p className="mt-4 font-display font-semibold text-ink">{item.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-ink/60">{item.description}</p>
-              </li>
+            {whyChooseUs.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.1}>
+                <li className="group h-full rounded-2xl bg-primary-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-primary-100 hover:shadow-md">
+                  <CheckCircle2 className="h-5 w-5 text-accent-600 transition-transform duration-300 group-hover:scale-110" />
+                  <p className="mt-4 font-display font-semibold text-ink">{item.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-ink/60">{item.description}</p>
+                </li>
+              </Reveal>
             ))}
           </ul>
         </div>

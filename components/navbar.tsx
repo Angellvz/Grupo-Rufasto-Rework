@@ -4,24 +4,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, MapPin, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/button";
-import { navLinks, whatsappLink } from "@/lib/data";
+import { navLinks, whatsappLink, siteConfig } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -32,27 +24,54 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white/90 shadow-sm backdrop-blur-md"
-          : "bg-transparent"
-      )}
-    >
-      <Container>
-        <nav className="flex h-[72px] items-center justify-between" aria-label="Principal">
-          <Logo light={!scrolled} />
+    <header className="fixed inset-x-0 top-0 z-50 flex flex-col w-full">
+      {/* Topbar */}
+      <div className="hidden w-full bg-primary-900 px-4 py-2.5 text-[11px] font-medium tracking-wide text-white/90 sm:block">
+        <Container className="flex items-center justify-center gap-10">
+          <div className="flex items-center gap-8">
+            <a 
+              href="https://maps.app.goo.gl/foc2HWdfYXVF2d1v9" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 hover:text-white transition-colors group"
+            >
+              <MapPin className="h-4 w-4 text-white animate-pulse" />
+              <span className="border-b border-transparent group-hover:border-white transition-colors">{siteConfig.address}</span>
+            </a>
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-white animate-pulse" />
+              <span>+51 {siteConfig.phoneWhatsapp}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-5">
+            <a href={siteConfig.social.facebook} target="_blank" rel="noreferrer" className="text-white hover:text-accent-400 transition-colors group" aria-label="Facebook">
+              <Facebook className="h-4 w-4 transition-transform group-hover:scale-125" />
+            </a>
+            <a href={siteConfig.social.instagram} target="_blank" rel="noreferrer" className="text-white hover:text-accent-400 transition-colors group" aria-label="Instagram">
+              <Instagram className="h-4 w-4 transition-transform group-hover:scale-125" />
+            </a>
+            <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" className="text-white hover:text-accent-400 transition-colors group" aria-label="LinkedIn">
+              <Linkedin className="h-4 w-4 transition-transform group-hover:scale-125" />
+            </a>
+          </div>
+        </Container>
+      </div>
+
+      {/* Main Nav */}
+      <div className="w-full border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md">
+        <Container>
+          <nav className="flex h-[72px] items-center justify-between" aria-label="Principal">
+            <Logo />
 
           <ul className="hidden items-center gap-9 lg:flex">
-            {navLinks.map((link) => (
+            {navLinks.map((link, i) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   className={cn(
-                    "relative text-sm font-medium tracking-tight transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-accent-500 after:transition-all after:duration-300 hover:after:w-full",
-                    scrolled ? "text-ink hover:text-primary" : "text-white hover:text-white",
-                    pathname === link.href && "after:w-full"
+                    "relative inline-block text-sm font-medium tracking-tight text-ink transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-primary-700 after:transition-all after:duration-300 hover:text-primary-700 hover:after:w-full",
+                    pathname === link.href && "text-primary-700 after:w-full",
+                    `animate-nav-wave delay-nav-${i + 1}`
                   )}
                 >
                   {link.label}
@@ -66,7 +85,7 @@ export function Navbar() {
               href={whatsappLink("Hola Grupo Rufasto, quisiera información sobre sus servicios")}
               target="_blank"
               rel="noopener noreferrer"
-              variant={scrolled ? "primary" : "accent"}
+              variant="inverse"
               size="md"
             >
               <MessageCircle className="h-4 w-4" />
@@ -79,15 +98,13 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
-            className={cn(
-              "flex h-10 w-10 items-center justify-center rounded-full lg:hidden",
-              scrolled ? "text-ink" : "text-white"
-            )}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-ink lg:hidden"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </nav>
       </Container>
+      </div>
 
       <AnimatePresence>
         {open && (
@@ -96,7 +113,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden bg-primary-900 lg:hidden"
+            className="overflow-hidden border-t border-border bg-white lg:hidden"
           >
             <Container className="flex flex-col gap-1 py-6">
               {navLinks.map((link, i) => (
@@ -108,7 +125,10 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="block rounded-lg px-3 py-3 text-lg font-medium text-white/90 transition-colors hover:bg-white/5"
+                    className={cn(
+                      "block rounded-lg px-3 py-3 text-lg font-medium transition-colors hover:bg-surface",
+                      pathname === link.href ? "text-primary-700" : "text-ink"
+                    )}
                   >
                     {link.label}
                   </Link>
@@ -118,7 +138,7 @@ export function Navbar() {
                 href={whatsappLink("Hola Grupo Rufasto, quisiera información sobre sus servicios")}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="accent"
+                variant="inverse"
                 size="lg"
                 className="mt-4 w-full"
               >

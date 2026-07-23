@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { whatsappLink } from "@/lib/data";
+
 const slides = [
   {
     image: "/images/LideresSanidad.svg",
@@ -35,18 +37,9 @@ export function Hero() {
       aria-label="Presentación de Grupo Rufasto"
     >
       <div className="relative mx-auto min-h-[calc(min(720px,100svh)-72px)] max-w-[1600px]">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.image}
-            aria-hidden={index !== activeSlide}
-            className={`absolute inset-0 transition-all duration-700 ease-out ${
-              index === activeSlide
-                ? "translate-x-0 opacity-100"
-                : index < activeSlide
-                  ? "-translate-x-8 opacity-0"
-                  : "translate-x-8 opacity-0"
-            }`}
-          >
+        {slides.map((slide, index) => {
+          const isLideres = slide.image === "/images/LideresSanidad.svg";
+          const imageContent = (
             <Image
               src={slide.image}
               alt={slide.alt}
@@ -55,8 +48,35 @@ export function Hero() {
               className="object-cover"
               sizes="100vw"
             />
-          </div>
-        ))}
+          );
+
+          return (
+            <div
+              key={slide.image}
+              aria-hidden={index !== activeSlide}
+              className={`absolute inset-0 transition-all duration-700 ease-out ${
+                index === activeSlide
+                  ? "translate-x-0 opacity-100"
+                  : index < activeSlide
+                    ? "-translate-x-8 opacity-0"
+                    : "translate-x-8 opacity-0"
+              }`}
+            >
+              {isLideres ? (
+                <a 
+                  href={whatsappLink("Hola Grupo Rufasto, quisiera información sobre sus servicios")}
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="block h-full w-full"
+                >
+                  {imageContent}
+                </a>
+              ) : (
+                imageContent
+              )}
+            </div>
+          );
+        })}
 
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primary-900/35 to-transparent" />
 

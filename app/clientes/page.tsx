@@ -1,25 +1,17 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/sections/page-header";
 import { ClientsGrid } from "@/components/sections/clients-grid";
-import { Cta } from "@/components/sections/cta";
 
 export const metadata: Metadata = {
-  title: "Clientes",
+  title: "Nuestros Clientes | Fumigación y Sanidad Ambiental",
   description:
-    "Empresas industriales, mineras y corporativas del sur del Perú que confían en Grupo Rufasto.",
+    "Empresas industriales, mineras y corporativas del sur del Perú que confían en Grupo Rufasto para sus servicios de fumigación y sanidad ambiental.",
   alternates: { canonical: "/clientes" },
 };
 
 export default function ClientesPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Clientes"
-        title="Empresas que confían en nuestro trabajo"
-        description="Acompañamos a organizaciones industriales, mineras y corporativas en el sur del Perú con servicios de sanidad ambiental certificados."
-      />
       <ClientsGrid />
-      <Cta />
     </>
   );
 }

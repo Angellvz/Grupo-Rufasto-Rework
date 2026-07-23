@@ -2,7 +2,9 @@ import Link from "next/link";
 import { Instagram, Facebook, Linkedin, MapPin, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/logo";
+import { LinkButton } from "@/components/ui/button";
 import { navLinks, siteConfig, whatsappLink } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   return (
@@ -38,11 +40,14 @@ export function Footer() {
             Navegación
           </h3>
           <ul className="mt-5 space-y-3">
-            {navLinks.map((link) => (
+            {navLinks.map((link, i) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-white/70 transition-colors hover:text-accent-400"
+                  className={cn(
+                    "inline-block text-sm text-white/70 transition-colors hover:text-accent-400",
+                    `animate-nav-wave delay-nav-${i + 1}`
+                  )}
                 >
                   {link.label}
                 </Link>
@@ -69,18 +74,23 @@ export function Footer() {
           <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-white/40">
             Contacto
           </h3>
-          <p className="mt-5 text-sm text-white/70">
-            Escríbenos y te responderemos a la brevedad.
-          </p>
-          <a
+          <ul className="mt-5 space-y-3">
+            <li className="flex items-start gap-2 text-sm text-white/70 leading-relaxed">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-500" />
+              <span>{siteConfig.address}</span>
+            </li>
+          </ul>
+          <LinkButton
             href={whatsappLink("Hola Grupo Rufasto, quisiera información sobre sus servicios")}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-primary-900 transition-colors hover:bg-accent-400"
+            variant="inverse"
+            size="md"
+            className="mt-6"
           >
             <MessageCircle className="h-4 w-4" />
             WhatsApp
-          </a>
+          </LinkButton>
         </div>
       </Container>
 
