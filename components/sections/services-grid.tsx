@@ -107,14 +107,14 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
           {/* Navigation Buttons */}
           <button
             onClick={scrollPrev}
-            className="absolute -left-3 sm:-left-6 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-ink shadow-md transition-all hover:border-primary hover:bg-primary hover:text-white hidden sm:flex"
+            className="absolute -left-2 sm:-left-6 top-1/2 z-10 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-ink shadow-md transition-all hover:border-primary hover:bg-primary hover:text-white"
             aria-label="Servicio anterior"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute -right-3 sm:-right-6 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-ink shadow-md transition-all hover:border-primary hover:bg-primary hover:text-white hidden sm:flex"
+            className="absolute -right-2 sm:-right-6 top-1/2 z-10 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-ink shadow-md transition-all hover:border-primary hover:bg-primary hover:text-white"
             aria-label="Siguiente servicio"
           >
             <ChevronRight className="h-5 w-5" />
