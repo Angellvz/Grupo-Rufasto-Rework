@@ -101,7 +101,7 @@ export function ServicesList() {
                       href={whatsappLink(wsetMessage)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-primary-700 hover:shadow-lg group/btn"
+                      className="relative z-0 mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-primary-700 hover:shadow-lg group/btn"
                     >
                       <span className="absolute inset-0 -z-10 animate-echo rounded-full bg-primary" />
                       Consultar servicio
